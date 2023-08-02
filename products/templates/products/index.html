@@ -1,0 +1,67 @@
+{% load crispy_forms_tags %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Index View</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  </head>
+  <body>
+    
+
+    <div class="container container-fluid">
+      <nav class="navbar navbar-light bg-light justify-content-between">
+        <a class="navbar-brand">Product Django Filter</a>
+        
+      </nav>
+
+      <div class="row my-4">
+        <div class="col-md-4">
+          <form method="get">
+           <div class="row">
+            <div class="col-md-12">
+              {{ filter.form.name|as_crispy_field}}
+            </div>
+           </div>
+           <br>
+           <hr>
+            <div class="col-md-12">
+              {{ filter.form.price|as_crispy_field}}
+            </div>
+                  
+                  <button class="btn btn-primary my-2" type="submit">Search</button>
+               </form>
+        </div>
+
+        <div class="col-md-8">
+
+          <div class="row row-cols-1 row-cols-md-2 g-4">
+            {% for product in filter.qs %}
+            <div class="col">
+              
+              <div class="card">
+                <img src="{{product.image.url}}" class="card-img-top" alt="..." style="height: 300px;">
+                <div class="card-body">
+                  <h5 class="card-title">{{product.name}}</h5>
+                  <p class="card-text">
+                    {{product.content|truncatewords:20}} 
+                   </p>
+                </div>
+                <div class="card-footer">
+                 <p class="card-title"> Price :  ${{product.price}}</p>
+                </div>
+                
+
+              </div>
+              
+            </div>
+            {% endfor %}
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  </body>
+</html>
